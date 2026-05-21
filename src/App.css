@@ -129,15 +129,16 @@ body {
 
 .green {
   color: #4ade80;
-  display: block;
-  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .red {
-  color: #f87171;
-  display: block;
-  margin-top: 10px;
+  color: #ff6b6b;
+  font-size: 14px;
+  font-weight: 600;
 }
+
 
 /* CONTENT */
 
@@ -203,7 +204,7 @@ body {
   background: #f4b942;
 }
 
-.green {
+.dot.green {
   background: #4ade80;
 }
 
