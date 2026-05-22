@@ -1,71 +1,147 @@
-import { entregas, entregadores } from '../data/mock'
+import "../App.css"
 
 function Dashboard() {
-  const pendentes = entregas.filter(
-    (e) => e.status === 'Pendente'
-  ).length
-
-  const rota = entregas.filter(
-    (e) => e.status === 'Em rota'
-  ).length
-
-  const atrasadas = entregas.filter(
-    (e) => e.status === 'Atrasada'
-  ).length
-
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="dashboard">
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '20px',
-          marginTop: '30px',
-        }}
-      >
-        <div style={card}>
-          <h3>Pendentes</h3>
-          <p>{pendentes}</p>
+      {/* SIDEBAR */}
+      <aside className="sidebar">
+
+        <img
+          src="/logo.png"
+          alt="Novavest"
+          className="logo"
+        />
+
+        <p className="subtitle">
+          Painel administrativo
+        </p>
+
+        <div className="menu">
+          <div className="menu-item active">Dashboard</div>
+          <div className="menu-item">Pedidos</div>
+          <div className="menu-item">Clientes</div>
+          <div className="menu-item">Produtos</div>
+          <div className="menu-item">Orçamentos</div>
+          <div className="menu-item">Relatórios</div>
+          <div className="menu-item">Configurações</div>
         </div>
 
-        <div style={card}>
-          <h3>Em rota</h3>
-          <p>{rota}</p>
-        </div>
+      </aside>
 
-        <div style={card}>
-          <h3>Atrasadas</h3>
-          <p>{atrasadas}</p>
-        </div>
-      </div>
+      {/* MAIN */}
+      <main className="main">
 
-      <div style={{ marginTop: '40px' }}>
-        <h2>Entregadores ativos</h2>
+        <div className="header">
 
-        {entregadores.map((item) => (
-          <div key={item.id} style={listItem}>
-            <strong>{item.nome}</strong> — {item.status}
+          <div>
+            <h1>Dashboard</h1>
+            <p className="welcome">Bem-vindo ao painel Novavest</p>
           </div>
-        ))}
-      </div>
+
+          <button className="btn">+ Novo pedido</button>
+
+        </div>
+
+        {/* CARDS */}
+        <div className="cards">
+
+          <div className="card">
+            <p className="card-title">Pedidos este mês</p>
+            <h2>142</h2>
+            <span className="green">↑ 12% vs mês anterior</span>
+          </div>
+
+          <div className="card">
+            <p className="card-title">Receita</p>
+            <h2>38.450</h2>
+            <span className="green">↑ crescimento</span>
+          </div>
+
+          <div className="card">
+            <p className="card-title">Clientes</p>
+            <h2>67</h2>
+            <span className="green">↑ novos clientes</span>
+          </div>
+
+          <div className="card">
+            <p className="card-title">Orçamentos</p>
+            <h2>11</h2>
+            <span className="red">↓ pendentes</span>
+          </div>
+
+        </div>
+
+        {/* CONTENT */}
+        <div className="content">
+
+          <div className="panel">
+
+            <div className="panel-header">
+              <h2>Últimos pedidos</h2>
+              <button className="view-all">Ver todos</button>
+            </div>
+
+            <div className="order">
+              <div>
+                <strong>Condomínio Barra Mar</strong>
+                <p>Serviços gerais</p>
+              </div>
+
+              <strong>R$ 4.200</strong>
+
+              <span className="badge green-badge">Entregue</span>
+            </div>
+
+            <div className="order">
+              <div>
+                <strong>Restaurante Sabor & Cia</strong>
+                <p>Uniformes</p>
+              </div>
+
+              <strong>R$ 1.850</strong>
+
+              <span className="badge yellow-badge">Produção</span>
+            </div>
+
+          </div>
+
+          <div className="panel">
+
+            <h2 className="activity-title">Atividade recente</h2>
+
+            <div className="activity">
+              <div className="dot yellow"></div>
+              <div>
+                <p>Novo orçamento solicitado</p>
+                <span>há 20 min</span>
+              </div>
+            </div>
+
+            <div className="activity">
+              <div className="dot green"></div>
+              <div>
+                <p>Pedido entregue</p>
+                <span>há 1h</span>
+              </div>
+            </div>
+
+            <div className="activity">
+              <div className="dot gray"></div>
+              <div>
+                <p>Produto atualizado</p>
+                <span>há 3h</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+
     </div>
   )
-}
-
-const card = {
-  background: '#fff',
-  padding: '20px',
-  borderRadius: '12px',
-  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-}
-
-const listItem = {
-  background: '#fff',
-  padding: '15px',
-  marginTop: '10px',
-  borderRadius: '10px',
 }
 
 export default Dashboard
