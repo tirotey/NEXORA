@@ -12,15 +12,18 @@ function Login() {
   const navigate = useNavigate()
 
   const handleLogin = (e) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    const success = login(email, senha)
+  setErro("")
 
-    if (success) {
-      navigate("/dashboard")
-    } else {
-      setErro("Email ou senha inválidos")
-    }
+  const success = login(email, senha)
+
+  if (success) {
+    navigate("/dashboard")
+  } else {
+    setErro("Email ou senha inválidos")
+  }
+
   }
 
   return (
