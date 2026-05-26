@@ -1,20 +1,35 @@
 import "../App.css"
-import { pedidos } from "../data/mock"
+import { pedidos as pedidosMock } from "../data/mock"
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const pedidosSalvos =
+    JSON.parse(localStorage.getItem("pedidos")) || []
+
+  const pedidosExcluidos =
+    JSON.parse(localStorage.getItem("pedidosExcluidos")) || []
+
+  const pedidosMockFiltrados = pedidosMock.filter(
+    (pedido) => !pedidosExcluidos.includes(pedido.id)
+  )
+
+  const pedidos = [...pedidosSalvos, ...pedidosMockFiltrados]
+
   const totalPedidos = pedidos.length
 
-  const receitaTotal = pedidos.reduce((total, pedido) => {
-    return total + pedido.valor
-  }, 0)
+  const navigate = useNavigate()
 
-  const clientesUnicos = new Set(
-    pedidos.map((pedido) => pedido.cliente)
-  ).size
+const receitaTotal = pedidos.reduce((total, pedido) => {
+  return total + pedido.valor
+}, 0)
 
-  const orcamentosPendentes = pedidos.filter((pedido) => {
-    return pedido.status === "Pendente"
-  }).length
+const clientesUnicos = new Set(
+  pedidos.map((pedido) => pedido.cliente)
+).size
+
+const orcamentosPendentes = pedidos.filter((pedido) => {
+  return pedido.status === "Pendente"
+}).length
 
   return (
     <main className="main">
@@ -26,7 +41,8 @@ function Dashboard() {
           </p>
         </div>
 
-        <button className="btn">
+        <button className="btn" 
+        onClick={() => navigate("/pedidos/novo")}>
           + Novo pedido
         </button>
       </div>
@@ -67,9 +83,12 @@ function Dashboard() {
           <div className="panel-header">
             <h2>Últimos pedidos</h2>
 
-            <button className="ver-todos-btn">
-              Ver pedidos
-            </button>
+            <button
+  className="ver-todos-btn"
+  onClick={() => navigate("/pedidos")}
+>
+  Ver pedidos
+</button>
           </div>
 
           {pedidos.map((pedido) => (
@@ -86,9 +105,19 @@ function Dashboard() {
                 })}
               </strong>
 
-              <span className="badge green-badge">
-                {pedido.status}
-              </span>
+              <span
+  className={`badge ${
+    pedido.status === "Entregue"
+      ? "green-badge"
+      : pedido.status === "Produção"
+      ? "yellow-badge"
+      : pedido.status === "Pendente"
+      ? "red-badge"
+      : ""
+  }`}
+>
+  {pedido.status}
+</span>
             </div>
           ))}
         </div>

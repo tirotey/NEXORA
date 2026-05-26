@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 import Login from "./pages/Login.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
-
 import Pedidos from "./pages/Pedidos.jsx"
+import NovoPedido from "./pages/NovoPedido.jsx"
 import Clientes from "./pages/Clientes.jsx"
 import Produtos from "./pages/Produtos.jsx"
 import Orcamentos from "./pages/Orcamentos.jsx"
@@ -27,6 +28,7 @@ function App() {
         >
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/pedidos/novo" element={<NovoPedido />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/orcamentos" element={<Orcamentos />} />
