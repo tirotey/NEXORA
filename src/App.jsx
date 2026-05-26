@@ -10,82 +10,30 @@ import Relatorios from "./pages/Relatorios.jsx"
 import Configuracoes from "./pages/Configuracoes.jsx"
 
 import PrivateRoute from "./routes/PrivateRoute.jsx"
+import Layout from "./components/Layout.jsx"
+
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
+        <Route path="/" element={<Login />} />
 
         <Route
-          path="/"
-          element={<Login />}
-        />
-
-        <Route
-          path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Layout />
             </PrivateRoute>
           }
-        />
-
-        <Route
-          path="/pedidos"
-          element={
-            <PrivateRoute>
-              <Pedidos />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/clientes"
-          element={
-            <PrivateRoute>
-              <Clientes />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/produtos"
-          element={
-            <PrivateRoute>
-              <Produtos />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/orcamentos"
-          element={
-            <PrivateRoute>
-              <Orcamentos />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/relatorios"
-          element={
-            <PrivateRoute>
-              <Relatorios />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/configuracoes"
-          element={
-            <PrivateRoute>
-              <Configuracoes />
-            </PrivateRoute>
-          }
-        />
-
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/clientes" element={<Clientes />} />
+          <Route path="/produtos" element={<Produtos />} />
+          <Route path="/orcamentos" element={<Orcamentos />} />
+          <Route path="/relatorios" element={<Relatorios />} />
+          <Route path="/configuracoes" element={<Configuracoes />} />
+        </Route>
       </Routes>
-
     </BrowserRouter>
   )
 }

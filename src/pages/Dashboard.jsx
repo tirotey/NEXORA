@@ -1,210 +1,129 @@
 import "../App.css"
-import { NavLink, useNavigate } from "react-router-dom"
-import { logout } from "../services/auth"
+import { pedidos } from "../data/mock"
 
 function Dashboard() {
+  const totalPedidos = pedidos.length
 
-  const navigate = useNavigate()
+  const receitaTotal = pedidos.reduce((total, pedido) => {
+    return total + pedido.valor
+  }, 0)
 
-  const handleLogout = () => {
-    logout()
-    navigate("/")
-  }
+  const clientesUnicos = new Set(
+    pedidos.map((pedido) => pedido.cliente)
+  ).size
+
+  const orcamentosPendentes = pedidos.filter((pedido) => {
+    return pedido.status === "Pendente"
+  }).length
 
   return (
-    <div className="dashboard">
-
-      {/* SIDEBAR */}
-      <aside className="sidebar">
-
-        <img
-          src="/logo.png"
-          alt="Novavest"
-          className="logo"
-        />
-
-        <p className="subtitle">
-          Painel administrativo
-        </p>
-
-        <div className="menu">
-
-          <NavLink to="/dashboard" className="menu-item">
-            Dashboard
-          </NavLink>
-
-          <NavLink to="/pedidos" className="menu-item">
-            Pedidos
-          </NavLink>
-
-          <NavLink to="/clientes" className="menu-item">
-            Clientes
-          </NavLink>
-
-          <NavLink to="/produtos" className="menu-item">
-            Produtos
-          </NavLink>
-
-          <NavLink to="/orcamentos" className="menu-item">
-            Orçamentos
-          </NavLink>
-
-          <NavLink to="/relatorios" className="menu-item">
-            Relatórios
-          </NavLink>
-
-          <NavLink to="/configuracoes" className="menu-item">
-            Configurações
-          </NavLink>
-
+    <main className="main">
+      <div className="header">
+        <div>
+          <h1>Dashboard</h1>
+          <p className="welcome">
+            Bem-vindo ao painel Novavest
+          </p>
         </div>
 
-        <button
-          type="button"
-          className="logout-btn"
-          onClick={handleLogout}
-        >
-          Sair
+        <button className="btn">
+          + Novo pedido
         </button>
+      </div>
 
-      </aside>
-
-      {/* MAIN */}
-      <main className="main">
-
-        <div className="header">
-
-          <div>
-            <h1>Dashboard</h1>
-            <p className="welcome">
-              Bem-vindo ao painel Novavest
-            </p>
-          </div>
-
-          <button className="btn">
-            + Novo pedido
-          </button>
-
+      <div className="cards">
+        <div className="card">
+          <p className="card-title">Pedidos este mês</p>
+          <h2>{totalPedidos}</h2>
+          <span className="green">Dados atualizados</span>
         </div>
 
-        {/* CARDS */}
-        <div className="cards">
-
-          <div className="card">
-            <p className="card-title">Pedidos este mês</p>
-            <h2>142</h2>
-            <span className="green">
-              ↑ 12% vs mês anterior
-            </span>
-          </div>
-
-          <div className="card">
-            <p className="card-title">Receita</p>
-            <h2>38.450</h2>
-            <span className="green">
-              ↑ crescimento
-            </span>
-          </div>
-
-          <div className="card">
-            <p className="card-title">Clientes</p>
-            <h2>67</h2>
-            <span className="green">
-              ↑ novos clientes
-            </span>
-          </div>
-
-          <div className="card">
-            <p className="card-title">Orçamentos</p>
-            <h2>11</h2>
-            <span className="red">
-              ↓ pendentes
-            </span>
-          </div>
-
+        <div className="card">
+          <p className="card-title">Receita</p>
+          <h2>
+            {receitaTotal.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </h2>
+          <span className="green">Total em pedidos</span>
         </div>
 
-        {/* CONTENT */}
-        <div className="content">
+        <div className="card">
+          <p className="card-title">Clientes</p>
+          <h2>{clientesUnicos}</h2>
+          <span className="green">Clientes ativos</span>
+        </div>
 
-          <div className="panel">
+        <div className="card">
+          <p className="card-title">Orçamentos</p>
+          <h2>{orcamentosPendentes}</h2>
+          <span className="red">Pendentes</span>
+        </div>
+      </div>
 
-            <div className="panel-header">
-              <h2>Últimos pedidos</h2>
+      <div className="content">
+        <div className="panel">
+          <div className="panel-header">
+            <h2>Últimos pedidos</h2>
 
-              <button className="ver-todos-btn">
-  Ver pedidos
-</button>
-            </div>
+            <button className="ver-todos-btn">
+              Ver pedidos
+            </button>
+          </div>
 
-            <div className="order">
+          {pedidos.map((pedido) => (
+            <div className="order" key={pedido.id}>
               <div>
-                <strong>Condomínio Barra Mar</strong>
-                <p>Serviços gerais</p>
+                <strong>{pedido.cliente}</strong>
+                <p>{pedido.servico}</p>
               </div>
 
-              <strong>R$ 4.200</strong>
+              <strong>
+                {pedido.valor.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </strong>
 
               <span className="badge green-badge">
-                Entregue
+                {pedido.status}
               </span>
             </div>
-
-            <div className="order">
-              <div>
-                <strong>Restaurante Sabor & Cia</strong>
-                <p>Uniformes</p>
-              </div>
-
-              <strong>R$ 1.850</strong>
-
-              <span className="badge yellow-badge">
-                Produção
-              </span>
-            </div>
-
-          </div>
-
-          <div className="panel">
-
-            <h2 className="activity-title">
-              Atividade recente
-            </h2>
-
-            <div className="activity">
-              <div className="dot yellow"></div>
-
-              <div>
-                <p>Novo orçamento solicitado</p>
-                <span>há 20 min</span>
-              </div>
-            </div>
-
-            <div className="activity">
-              <div className="dot green"></div>
-
-              <div>
-                <p>Pedido entregue</p>
-                <span>há 1h</span>
-              </div>
-            </div>
-
-            <div className="activity">
-              <div className="dot gray"></div>
-
-              <div>
-                <p>Produto atualizado</p>
-                <span>há 3h</span>
-              </div>
-            </div>
-
-          </div>
-
+          ))}
         </div>
 
-      </main>
+        <div className="panel">
+          <h2 className="activity-title">
+            Atividade recente
+          </h2>
 
-    </div>
+          <div className="activity">
+            <div className="dot yellow"></div>
+            <div>
+              <p>Novo orçamento solicitado</p>
+              <span>há 20 min</span>
+            </div>
+          </div>
+
+          <div className="activity">
+            <div className="dot green"></div>
+            <div>
+              <p>Pedido entregue</p>
+              <span>há 1h</span>
+            </div>
+          </div>
+
+          <div className="activity">
+            <div className="dot gray"></div>
+            <div>
+              <p>Produto atualizado</p>
+              <span>há 3h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   )
 }
 

@@ -1,62 +1,69 @@
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
+import { logout } from "../services/auth"
+import "../App.css"
 
 function Layout() {
-  const location = useLocation()
+  const navigate = useNavigate()
 
-  const active = (path) =>
-    location.pathname === path ? '#111827' : '#6b7280'
+  const handleLogout = () => {
+    logout()
+    navigate("/")
+  }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Arial' }}>
-      <aside
-        style={{
-          width: '240px',
-          background: '#f3f4f6',
-          padding: '20px',
-          borderRight: '1px solid #ddd',
-        }}
-      >
-        <h2 style={{ marginBottom: '30px' }}>NovaVest</h2>
+    <div className="dashboard">
+      <aside className="sidebar">      
 
-        <nav
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '15px',
-          }}
-        >
-          <Link
-            to="/"
-            style={{ textDecoration: 'none', color: active('/') }}
-          >
+        <img
+  src="/logo.png"
+  alt="NovaVest"
+  className="logo"
+/>
+
+        <p className="subtitle">
+          Painel administrativo
+        </p>
+
+        <nav className="menu">
+          <NavLink to="/dashboard" className="menu-item">
             Dashboard
-          </Link>
+          </NavLink>
 
-          <Link
-            to="/entregas"
-            style={{ textDecoration: 'none', color: active('/entregas') }}
-          >
-            Entregas
-          </Link>
+          <NavLink to="/pedidos" className="menu-item">
+            Pedidos
+          </NavLink>
 
-          <Link
-            to="/entregadores"
-            style={{ textDecoration: 'none', color: active('/entregadores') }}
-          >
-            Entregadores
-          </Link>
+          <NavLink to="/clientes" className="menu-item">
+            Clientes
+          </NavLink>
+
+          <NavLink to="/produtos" className="menu-item">
+            Produtos
+          </NavLink>
+
+          <NavLink to="/orcamentos" className="menu-item">
+            Orçamentos
+          </NavLink>
+
+          <NavLink to="/relatorios" className="menu-item">
+            Relatórios
+          </NavLink>
+
+          <NavLink to="/configuracoes" className="menu-item">
+            Configurações
+          </NavLink>
         </nav>
+
+        <button
+          type="button"
+          className="logout-btn"
+          onClick={handleLogout}
+        >
+          Sair
+        </button>
       </aside>
 
-      <main
-        style={{
-          flex: 1,
-          padding: '30px',
-          background: '#f9fafb',
-        }}
-      >
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   )
 }

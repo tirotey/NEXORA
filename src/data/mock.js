@@ -11,3 +11,31 @@ export const entregadores = [
   { id: 2, nome: 'Paulo Silva', telefone: '21 98800-1122', veiculo: 'Moto', status: 'Disponível', entregas_hoje: 5 },
   { id: 3, nome: 'Lucas Ferreira', telefone: '21 97700-4455', veiculo: 'Bicicleta', status: 'Disponível', entregas_hoje: 2 },
 ]
+
+
+export const pedidos = [
+  {
+    id: 1,
+    cliente: "Condomínio Barra Mar",
+    servico: "Serviços gerais",
+    status: "Entregue",
+    valor: 4200,
+    data: "25/05/2026",
+  },
+  {
+    id: 2,
+    cliente: "Restaurante Sabor & Cia",
+    servico: "Uniformes",
+    status: "Produção",
+    valor: 1850,
+    data: "24/05/2026",
+  },
+  {
+    id: 3,
+    cliente: "Mercado Central",
+    servico: "Material promocional",
+    status: "Pendente",
+    valor: 980,
+    data: "23/05/2026",
+  },
+]

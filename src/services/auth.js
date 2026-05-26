@@ -1,5 +1,5 @@
 export const login = (email, senha) => {
-  if (email === "admin@teste.com" && senha === "123456") {
+  if (email === "admin@teste.com" && senha === "123") {
     localStorage.setItem("auth", "true")
     return true
   }
