@@ -1,16 +1,40 @@
-# React + Vite
+# Nexora
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema de gestão desenvolvido em React para gerenciamento de clientes, pedidos, produtos e orçamentos.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Autenticação de usuários
+- Dashboard com indicadores
+- Gestão de clientes
+- Gestão de pedidos
+- Gestão de produtos
+- Gestão de orçamentos
+- Relatórios gerenciais
 
-## React Compiler
+## Tecnologias utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- React Router DOM
+- JavaScript
+- CSS
+- LocalStorage
 
-## Expanding the ESLint configuration
+## Objetivo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Projeto desenvolvido para estudo e aprimoramento de habilidades em desenvolvimento front-end, focando em componentes reutilizáveis, gerenciamento de estado, rotas protegidas e construção de interfaces modernas.
+
+## Próximas implementações
+
+- Backend em Python
+- Integração com banco de dados
+- Controle de usuários
+- Relatórios avançados
+- API REST
+
+## Como executar
+
+```bash
+npm install
+npm run dev
+```
