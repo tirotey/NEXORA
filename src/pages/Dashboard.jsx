@@ -37,7 +37,7 @@ const orcamentosPendentes = pedidos.filter((pedido) => {
         <div>
           <h1>Dashboard</h1>
           <p className="welcome">
-            Bem-vindo ao painel Novavest
+            Bem-vindo ao painel Nexora
           </p>
         </div>
 

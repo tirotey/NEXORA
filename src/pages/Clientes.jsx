@@ -239,7 +239,7 @@ const [clienteEditandoId, setClienteEditandoId] = useState(null)
   </div>
 
   <div className="form-group referencia-group">
-    <label>Referência obrigatória *</label>
+    <label>Ponto de referência *</label>
     <textarea
   placeholder="Ex: casa azul, próximo à farmácia, portão branco..."
   value={referencia}

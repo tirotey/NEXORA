@@ -33,7 +33,7 @@ function Login() {
 
         <img
           src="/logo.png"
-          alt="Novavest"
+          alt="Nexora"
           className="login-logo"
         />
 

@@ -16,12 +16,12 @@ function Layout() {
 
         <img
   src="/logo.png"
-  alt="NovaVest"
+  alt="Nexora"
   className="logo"
 />
 
         <p className="subtitle">
-          Painel administrativo
+          Sistema de Gestão
         </p>
 
         <nav className="menu">
